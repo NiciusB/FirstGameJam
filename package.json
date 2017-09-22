@@ -8,7 +8,8 @@
     "build": "webpack -p --progress --config webpack.config.build.js"
   },
   "dependencies": {
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "phaser-ce": "^2.8.7"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
