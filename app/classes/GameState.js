@@ -3,13 +3,14 @@ class GameState extends Phaser.State {
     super()
   }
   preload() {
-    this.load.image('einstein', 'assets/images/einstein.png')
+    this.load.image('01', 'assets/images/01.png')
+    this.load.image('02', 'assets/images/02.png')
   }
   create() {
-    const Player1 = require('./Player.js')
-    var p1 = new Player1(this.game, 0, 0)
-    var s = this.add.existing(p1)
-    s.rotation = 50
+    const Player = require('./Player.js')
+    var player1 = this.add.existing(new Player(this.game, 100, 100, '01'))
+    var player2 = this.add.existing(new Player(this.game, 100, 100, '02'))
+    player2.alpha = 0
   }
 }
 module.exports = GameState
