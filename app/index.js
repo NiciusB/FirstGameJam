@@ -13,14 +13,35 @@ window.PIXI = require('phaser-ce/build/custom/pixi')
 window.p2 = require('phaser-ce/build/custom/p2')
 window.Phaser = require('phaser-ce/build/custom/phaser-split')
 
-var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-game', { preload: preload, create: create })
-
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-game', { preload, create, update }, false, false)
+var s;
+var z;
+var c = 0;
 function preload() {
     game.load.image('einstein', 'assets/images/einstein.png')
-
+    game.load.image('01', 'assets/images/01.png')
+    game.load.image('02', 'assets/images/02.png')
 }
 
 function create() {
-    var s = game.add.sprite(80, 0, 'einstein')
-    s.rotation = 0.14
+    /*s = game.add.sprite(80, 0, 'einstein')
+    s.rotation = 0.33
+    z = game.add.sprite(900, 270, 'einstein')
+    z.scale.x = -1;
+    z.rotation = 0.33
+    z.alpha = 0.5*/
+    s = game.add.sprite(300, 300, '01')
+    s.scale.setTo(10, 10)
+    z = game.add.sprite(300, 300, '02')
+    z.scale.setTo(10, 10)
+    z.alpha = 0
+}
+
+function update() {
+    c += game.time.elapsedMS
+    while (c > 300) {
+        c -= 300
+        s.alpha = !s.alpha
+        z.alpha = !z.alpha
+    }
 }
