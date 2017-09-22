@@ -3,16 +3,14 @@
  */
 
 // Load application styles
-import 'styles/index.scss';
+import 'styles/index.scss'
 
-// ================================
-// APP HERE
-// ================================
-
+// Game
 window.PIXI = require('phaser-ce/build/custom/pixi')
 window.p2 = require('phaser-ce/build/custom/p2')
 window.Phaser = require('phaser-ce/build/custom/phaser-split')
 
+<<<<<<< HEAD
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-game', { preload, create, update }, false, false)
 var s;
 var z;
@@ -45,3 +43,11 @@ function update() {
         z.alpha = !z.alpha
     }
 }
+=======
+var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'phaser-game', null, false, false)
+
+const GameState = require('classes/GameState.js')
+game.state.add('GameState', GameState)
+
+game.state.start('GameState')
+>>>>>>> 27e2d117e902b228b7df83ac7e4bfde9b5597290
