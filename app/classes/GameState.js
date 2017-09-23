@@ -8,6 +8,7 @@ class GameState extends Phaser.State {
     this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 83, 141)
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 71.5, 100)
     this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
+    // bone 22, 22
   }
   create() {
     this.game.world.setBounds(0, 0, 3840, 600)
