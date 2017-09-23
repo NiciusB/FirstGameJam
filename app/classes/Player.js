@@ -9,7 +9,7 @@ class Player extends Phaser.Sprite {
     this.speed = 200
 
     this.animations.add('standing', [0], 0, false)
-    this.animations.add('walking', [1, 0], 5, false)
+    this.animations.add('walking', [1, 2], 5, false)
     this.play('standing')
   }
 
@@ -37,6 +37,15 @@ class Player extends Phaser.Sprite {
       this.scale.x = 1
       this.body.angle = 0
     }
+    // pruebas de disparo
+    /*if (this.game.input.keyboard.isDown(Phaser.KeyCode.RIGHT)) {
+      this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
+      
+      var fire = game.add.sprite(this.body.x, this.body.y, 'fire_1')
+      //fire.body.moveRight(this.speed++)
+    }*/
+
+  
   }
 }
 
