@@ -4,12 +4,13 @@ class Player extends Phaser.Sprite {
     game.physics.p2.enable(this, true)
     this.body.fixedRotation = true
     this.body.clearShapes()
-    this.body.addRectangle(65, 80, -10, 0)
+    this.body.addRectangle(50, 80, -5, 0)
 
     this.speed = 200
 
-    this.animations.add('hi', [0,1], 5, true)
-    this.play('hi')
+    this.animations.add('standing', [0], 0, false)
+    this.animations.add('walking', [0,1], 5, false)
+    this.play('standing')
   }
 
   update() {
@@ -18,17 +19,21 @@ class Player extends Phaser.Sprite {
     this.body.velocity.y *= 12.5 / delta
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.S)) {
       this.body.moveDown(this.speed)
+      this.play('walking')
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.W)) {
       this.body.moveUp(this.speed)
+      this.play('walking')
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.A)) {
       this.body.moveLeft(this.speed)
+      this.play('walking')
       this.scale.x = -1
       this.body.angle = 180
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.D)) {
       this.body.moveRight(this.speed)
+      this.play('walking')
       this.scale.x = 1
       this.body.angle = 0
     }
