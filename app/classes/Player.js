@@ -1,9 +1,9 @@
 class Player extends Phaser.Sprite {
   constructor(game, x, y, sprite) {
     super(game, x, y, sprite)
-    this.scale.setTo(10, 10)
+    this.scale.setTo(5, 5)
     this.customCounter = 0
-    this.speed = 30
+    this.speed = 20
   }
 
   update() {
