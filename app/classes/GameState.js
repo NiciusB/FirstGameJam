@@ -3,14 +3,16 @@ class GameState extends Phaser.State {
     super()
   }
   preload() {
-    this.load.image('01', 'assets/images/01.png')
-    this.load.image('02', 'assets/images/02.png')
+    this.load.image('stage01', 'assets/images/stage/01.png')
+    this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 17, 28)
   }
   create() {
+    this.game.add.sprite(0, 0, 'stage01')
+    this.game.world.setBounds(0, 0, 1920, 1920)
+
     const Player = require('./Player.js')
-    var player1 = this.add.existing(new Player(this.game, 100, 100, '01'))
-    var player2 = this.add.existing(new Player(this.game, 100, 100, '02'))
-    player2.alpha = 0
+    var player = this.add.existing(new Player(this.game, 100, 100))
+    this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
   }
 }
 
