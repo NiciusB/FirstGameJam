@@ -3,8 +3,8 @@ class GameState extends Phaser.State {
     super()
   }
   preload() {
-    this.load.image('stage01', 'assets/images/stage/01.png')
-    this.load.image('table', 'assets/images/stage/table.png')
+    this.load.image('stage01', 'assets/images/stage/fondo_1.png')
+    this.load.image('mesa_1', 'assets/images/stage/mesa_1.png')
     this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 85, 140)
   }
   create() {
@@ -15,7 +15,7 @@ class GameState extends Phaser.State {
 
     this.game.add.sprite(0, 0, 'stage01')
 
-    var mesa = this.game.add.sprite(300, this.game.world.centerY, 'table')
+    var mesa = this.game.add.sprite(300, this.game.world.centerY, 'mesa_1')
     this.game.physics.p2.enable(mesa)
     mesa.body.kinematic = true
     mesa.anchor.set(.5)
