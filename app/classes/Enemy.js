@@ -9,6 +9,8 @@ class Enemy extends Alive {
     this.speed = 0
     this.meleeAttackRange = false
     this.meleeAttackPower = false
+    this.meleeTTA = false // Time To Attack
+
     // Internal vars
     this.msInAttackRange = 0
   }
@@ -19,11 +21,11 @@ class Enemy extends Alive {
 
     if (this.inCamera) {
       // meleeAttack
-      if (this.meleeAttackRange && this.meleeAttackPower && Phaser.Math.distance(this.game.player.x, this.game.player.y / 1.5, this.x, this.y / 1.5) <= this.meleeAttackRange) {
+      if (this.meleeAttackRange && this.meleeAttackPower && this.meleeTTA && Phaser.Math.distance(this.game.player.x, this.game.player.y / 1.5, this.x, this.y / 1.5) <= this.meleeAttackRange) {
         this.play('meleeAttack')
         this.msInAttackRange += delta
-        while (this.msInAttackRange > 500) {
-          this.msInAttackRange -= 500
+        while (this.msInAttackRange > this.meleeTTA) {
+          this.msInAttackRange -= this.meleeTTA
           this.game.player.damage(this.meleeAttackPower)
         }
         if (this.x > this.game.player.x) {
@@ -38,7 +40,7 @@ class Enemy extends Alive {
         }
       }
       // Pathfinding
-      if (this.animations.currentAnim.name != 'meleeAttack') {
+      if (['walking', 'standing'].indexOf(this.animations.currentAnim.name) != -1) {
         this.msInAttackRange = 0
         const closeEnough = 5 // in pixels
         if (Math.round(this.x / closeEnough) != Math.round(this.game.player.x / closeEnough)) {

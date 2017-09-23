@@ -31,7 +31,7 @@ class Alive extends Phaser.Sprite {
       this.scale.x = this.body.velocity.x > 0 ? 1 : -1
     }
     this.body.setZeroVelocity()
-    if(this.body.x < 80) this.body.x = 80 // FUCK YOU LEFT WALL
+    if (this.body.x < 80) this.body.x = 80 // FUCK YOU LEFT WALL
   }
 }
 
