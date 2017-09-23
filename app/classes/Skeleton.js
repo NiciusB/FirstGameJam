@@ -14,6 +14,7 @@ class Skeleton extends Phaser.Sprite {
   
       // animaciones esqueleto atacando
       this.animations.add('attacking', [3, 4], 5, false)
+      this.animations.add('shooting', [5, 6], 5, false)
     }
   
     update() {
@@ -44,7 +45,9 @@ class Skeleton extends Phaser.Sprite {
       //ataque de esqueleto
       if (this.game.input.keyboard.isDown(Phaser.KeyCode.ENTER)){
         this.play('attacking')
-        this.play('attacking')
+      }
+      if (this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)){
+          this.play('shooting')
       }
     }
   }
