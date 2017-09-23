@@ -25,13 +25,11 @@ class Alive extends Phaser.Sprite {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
 
-    this.body.setZeroVelocity()
-
-    if (this.body.velocity.x < 0) {
-      this.scale.x = -1
-    } else {
-      this.scale.x = 1
+    if (this.body.velocity.x !== 0) {
+      this.scale.x = this.body.velocity.x > 0 ? 1 : -1
     }
+    this.body.setZeroVelocity()
+    if(this.body.x < 80) this.body.x = 80 // FUCK YOU LEFT WALL
   }
 }
 

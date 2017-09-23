@@ -15,6 +15,7 @@ class GameState extends Phaser.State {
     const worldHeight = 600
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.defaultRestitution = 0.9
+    this.game.world.setBounds(60, 60, worldWidth - 60 * 2, worldHeight - 60 * 2)
 
     this.game.add.sprite(0, 0, 'stage01')
 
@@ -23,7 +24,7 @@ class GameState extends Phaser.State {
     mesa.body.kinematic = true
 
     const Player = require('./Player.js')
-    var player = this.add.existing(new Player(this.game, this.game.world.randomX, this.game.world.randomY))
+    var player = this.add.existing(new Player(this.game, 200, this.game.world.randomY))
     this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
     this.game.camera.bounds.setTo(0, 0, worldWidth, worldHeight)
 
