@@ -10,10 +10,10 @@ class GameState extends Phaser.State {
     this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
   }
   create() {
-    this.game.world.setBounds(0, 0, 3840, 600)
+    const worldWidth = 3840
+    const worldHeight = 600
     this.game.physics.startSystem(Phaser.Physics.P2JS)
-    this.game.physics.p2.world.defaultContactMaterial.friction = 0.5
-    this.game.physics.p2.world.setGlobalStiffness(1e5)
+    this.game.physics.p2.defaultRestitution = 0.9
 
     this.game.add.sprite(0, 0, 'stage01')
 
@@ -22,12 +22,13 @@ class GameState extends Phaser.State {
     mesa.body.kinematic = true
 
     const Player = require('./Player.js')
-    var player = this.add.existing(new Player(this.game, 100, 100))
+    var player = this.add.existing(new Player(this.game, this.game.world.randomX, this.game.world.randomY))
+    this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
+    this.game.camera.bounds.setTo(0, 0, worldWidth, worldHeight)
 
     const Skeleton = require('./Skeleton.js')
-    var skeleton = this.add.existing(new Skeleton(this.game, 70, 70))
-    this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
-
+    const Enemy = require('./Enemy.js')
+    var skeleton = this.add.existing(new Skeleton(this.game, this.game.world.randomX, this.game.world.randomY))
   }
 }
 

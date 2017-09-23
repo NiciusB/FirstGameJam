@@ -1,12 +1,13 @@
-class Player extends Phaser.Sprite {
+import Alive from './Alive.js'
+class Player extends Alive {
   constructor(game, x, y) {
-    super(game, x, y, 'playerSprite', 1)
+    super(game, x, y, 'playerSprite')
     game.physics.p2.enable(this, true)
     this.body.fixedRotation = true
     this.body.clearShapes()
-    this.body.addRectangle(50, 80, -5, 0)
+    this.body.addRectangle(50, 80, 0, 0)
 
-    this.speed = 200
+    this.speed = 500
 
     this.animations.add('standing', [0], 0, false)
     this.animations.add('walking', [1, 2], 5, false)
@@ -14,9 +15,7 @@ class Player extends Phaser.Sprite {
   }
 
   update() {
-    const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
-    this.body.velocity.x *= 12.5 / delta // We must use something smaller than 16
-    this.body.velocity.y *= 12.5 / delta
+    super.update()
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.S)) {
       this.body.moveDown(this.speed)
       this.play('walking')
@@ -28,24 +27,11 @@ class Player extends Phaser.Sprite {
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.A)) {
       this.body.moveLeft(this.speed)
       this.play('walking')
-      this.scale.x = -1
-      this.body.angle = 180
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.D)) {
       this.body.moveRight(this.speed)
       this.play('walking')
-      this.scale.x = 1
-      this.body.angle = 0
     }
-    // pruebas de disparo
-    /*if (this.game.input.keyboard.isDown(Phaser.KeyCode.RIGHT)) {
-      this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
-      
-      var fire = game.add.sprite(this.body.x, this.body.y, 'fire_1')
-      //fire.body.moveRight(this.speed++)
-    }*/
-
-  
   }
 }
 
