@@ -13,4 +13,5 @@ class GameState extends Phaser.State {
     player2.alpha = 0
   }
 }
+
 module.exports = GameState
