@@ -2,7 +2,7 @@ import Alive from './Alive.js'
 class Enemy extends Alive {
   constructor(game, x, y, sprite) {
     super(game, x, y, sprite)
-    game.physics.p2.enable(this, true)
+    game.physics.p2.enable(this)
     this.body.fixedRotation = true
   }
 

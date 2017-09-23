@@ -13,13 +13,15 @@ class Alive extends Phaser.Sprite {
     return this
   }
   realKill() {
-    this.exists = true
-    this.visible = true
+    if (this == this.game.player) this.game.state.getCurrentState().gameOver()
+    this.exists = false
+    this.visible = false
     this.inputEnabled = false
     if (this.input) {
       this.input.useHandCursor = false
     }
     this.events.destroy()
+    this.destroy()
   }
   update() {
     super.update()

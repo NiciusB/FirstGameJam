@@ -1,3 +1,4 @@
+var playerHp;
 class GameState extends Phaser.State {
   constructor() {
     super()
@@ -19,18 +20,30 @@ class GameState extends Phaser.State {
 
     this.game.add.sprite(0, 0, 'stage01')
 
+    playerHp = this.game.add.text(10, 10, '', { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" })
+    playerHp.fixedToCamera = true
+    playerHp.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
+
     var mesa = this.game.add.sprite(300, this.game.world.centerY, 'mesa_1')
-    this.game.physics.p2.enable(mesa, true)
+    this.game.physics.p2.enable(mesa)
     mesa.body.kinematic = true
 
     const Player = require('./Player.js')
-    var player = this.add.existing(new Player(this.game, 200, this.game.world.randomY))
-    this.game.camera.follow(player, Phaser.Camera.FOLLOW_TOPDOWN)
+    this.game.player = this.add.existing(new Player(this.game, 200, this.game.world.randomY))
+    this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)
     this.game.camera.bounds.setTo(0, 0, worldWidth, worldHeight)
 
     const Skeleton = require('./Skeleton.js')
     const Enemy = require('./Enemy.js')
-    var skeleton = this.add.existing(new Skeleton(this.game, this.game.world.randomX, this.game.world.randomY))
+    var skeleton = this.add.existing(new Skeleton(this.game, 600, this.game.world.randomY))
+  }
+
+  update() {
+    playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
+  }
+
+  gameOver() {
+    this.game.state.start('GameState')
   }
 }
 
