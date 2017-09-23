@@ -1,4 +1,10 @@
 class Alive extends Phaser.Sprite {
+  constructor(game, x, y, sprite, frame) {
+    super(game, x, y, sprite, frame)
+    this.events.onAnimationComplete.add(() => {
+      this.play('standing')
+    }, this)
+  }
   kill() {
     this.alive = false
     this.body.setZeroVelocity()
@@ -12,6 +18,7 @@ class Alive extends Phaser.Sprite {
     } else this.realKill()
     return this
   }
+
   realKill() {
     if (this == this.game.player) this.game.state.getCurrentState().gameOver()
     this.exists = false
@@ -27,9 +34,6 @@ class Alive extends Phaser.Sprite {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
 
-    if (this.body.velocity.x !== 0) {
-      this.scale.x = this.body.velocity.x > 0 ? 1 : -1
-    }
     this.body.setZeroVelocity()
     if (this.body.x < 80) this.body.x = 80 // FUCK YOU LEFT WALL
   }

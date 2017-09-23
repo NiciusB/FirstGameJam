@@ -15,10 +15,6 @@ class Skeleton extends Enemy {
     this.animations.add('walking', [1, 2], 4, false)
     this.animations.add('meleeAttack', [3, 4], 4, false)
     this.play('standing')
-
-    this.events.onAnimationComplete.add(() => {
-      this.play('standing')
-    }, this)
   }
 
   update() {
