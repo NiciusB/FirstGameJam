@@ -9,7 +9,7 @@ class Player extends Phaser.Sprite {
     this.speed = 200
 
     this.animations.add('standing', [0], 0, false)
-    this.animations.add('walking', [0,1], 5, false)
+    this.animations.add('walking', [1, 0], 5, false)
     this.play('standing')
   }
 
