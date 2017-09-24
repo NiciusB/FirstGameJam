@@ -69,18 +69,6 @@ class Player extends Alive {
       this.body.moveRight(this.getSpeed())
       hasMoved = true
     }
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.ONE)) {
-      Potions(this, this.potions[0])
-      this.potions[0] = false
-    }
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.TWO)) {
-      Potions(this, this.potions[1])
-      this.potions[1] = false
-    }
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.THREE)) {
-      Potions(this, this.potions[2])
-      this.potions[2] = false
-    }
     if (this.weaponCooldown > 0) this.weaponCooldown -= delta
     if (this.weaponCooldownSlow > 0) this.weaponCooldownSlow -= delta
     const mouse = this.game.input.mousePointer
@@ -111,6 +99,18 @@ class Player extends Alive {
       } else {
         this.play('standing')
       }
+    }
+    if (this.game.input.keyboard.isDown(Phaser.KeyCode.ONE)) {
+      Potions(this, this.potions[0])
+      this.potions[0] = false
+    }
+    if (this.game && this.game.input.keyboard.isDown(Phaser.KeyCode.TWO)) { // this.game &&  because if the player dies, it doesnt exist
+      Potions(this, this.potions[1])
+      this.potions[1] = false
+    }
+    if (this.game && this.game.input.keyboard.isDown(Phaser.KeyCode.THREE)) {
+      Potions(this, this.potions[2])
+      this.potions[2] = false
     }
   }
 }
