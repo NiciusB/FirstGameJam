@@ -36,6 +36,7 @@ class Player extends Alive {
       this.animations.add('walking', [14, 13, 15, 13], 5, false)
       this.animations.add('attacking', [16, 17, 16], 10, false)
     } else alert(weapon)
+    this.play(this.animations.currentAnim.name)
   }
   getSpeed() {
     return this.speed / ((this.weaponCooldownSlow) > 0 ? 3 : 1)
