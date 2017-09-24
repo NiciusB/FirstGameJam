@@ -43,7 +43,7 @@ class GameState extends Phaser.State {
     this.game.Gui = new Gui(this.game)
     this.add.existing(this.game.Gui)
 
-    this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
+    this.game.player = this.add.existing(new Player(this.game, 130, this.game.world.centerY))
     if (currGame) {
       this.game.player.potions =  currGame.potions
       this.game.player.health = currGame.health
