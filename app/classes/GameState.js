@@ -11,6 +11,7 @@ class GameState extends Phaser.State {
     this.load.image('mesa_1', 'assets/images/stage/mesa_1.png')
     this.load.image('mesa_2', 'assets/images/stage/mesa_2.png')
     this.load.image('alfombra_1', 'assets/images/stage/alfombra_1.png')
+    this.load.image('puerta', 'assets/images/stage/puerta.png')
     this.load.image('estanteria', 'assets/images/stage/estanteria.png')
     this.load.spritesheet('lava', 'assets/images/stage/lava.png', 144, 156)
     this.load.spritesheet('cofre', 'assets/images/stage/cofre.png', 47, 37)
