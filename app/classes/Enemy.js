@@ -10,6 +10,7 @@ class Enemy extends Alive {
     this.hpBar.anchor.setTo(0.5, 0.65)
 
     // Attributes
+    this.body.mass = 10
     this.speed = 0
     this.meleeAttackRange = false
     this.meleeAttackPower = false

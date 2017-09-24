@@ -9,6 +9,7 @@ class Dagger extends Phaser.Sprite {
 
     // Attributes
     this.attackRange = 100
+    this.attackPower = 25
   }
 
   update() {
@@ -21,7 +22,7 @@ class Dagger extends Phaser.Sprite {
   kill() {
     this.game.enemySpawner.children.forEach(val => {
       if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange) {
-        val.damage(25)
+        val.damage(this.attackPower)
       }
     })
     super.kill()

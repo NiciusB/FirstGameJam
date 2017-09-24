@@ -4,20 +4,27 @@ class Staff extends Phaser.Sprite {
     this.player = player
     this.mousePos = mousePos
     // Attributes
-    this.trajectoryTime = 350
+    this.speed = 100
     this.attackRange = 125
-
-    this.game.time.events.add(this.trajectoryTime, this.kill, this)
+    this.attackPower = 45
+    this.delay = 300
   }
 
   update() {
+    super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
-    this.x += (this.mousePos.x - this.player.x) / (this.trajectoryTime / delta)
-    this.y += (this.mousePos.y - this.player.y) / (this.trajectoryTime / delta)
+    if (this.delay > 0) this.delay -= delta
+    if (this.alive && this.delay <= 0) {
+      const dir = new Phaser.Point(this.mousePos.x - this.x, this.mousePos.y - this.y).normalize()
+      this.x += dir.x * (this.speed / delta)
+      this.y += dir.y * (this.speed / delta)
+      if (Phaser.Math.distance(this.x, this.y, this.mousePos.x, this.mousePos.y) <= 10) {
+        this.kill()
+      }
+    }
   }
 
   kill() {
-
     var explosion = this.game.add.sprite(this.x, this.y, 'fire_1')
     explosion.anchor.set(0.5)
     explosion.scale.setTo(this.attackRange / this.width, this.attackRange / this.height)
@@ -27,7 +34,7 @@ class Staff extends Phaser.Sprite {
 
     this.game.enemySpawner.children.forEach(val => {
       if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange) {
-        val.damage(50)
+        val.damage(this.attackPower)
       }
     })
     super.kill()

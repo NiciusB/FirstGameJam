@@ -10,7 +10,7 @@ class Player extends Alive {
     this.body.clearShapes()
     this.body.addRectangle(50, 100, 0, 10)
 
-    this.speed = 500
+    this.speed = 300
     this.health = this.maxHealth = 100
 
     this.weaponCooldown = 0
