@@ -21,7 +21,7 @@ class Player extends Alive {
     this.play('standing')
   }
   getSpeed() {
-    return this.speed / ((this.weaponCooldown) > 200 ? 3 : 1)
+    return this.speed / ((this.weaponCooldownSlow) > 0 ? 3 : 1)
   }
   update() {
     super.update()
@@ -53,6 +53,7 @@ class Player extends Alive {
       hasMoved = true
     }
     if (this.weaponCooldown > 0) this.weaponCooldown -= delta
+    if (this.weaponCooldownSlow > 0) this.weaponCooldownSlow -= delta
     const mouse = this.game.input.mousePointer
     if (this.weaponCooldown <= 0 && mouse.isDown) {
       const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
@@ -66,6 +67,7 @@ class Player extends Alive {
           break
       }
       this.weaponCooldown = weapon.weaponCooldown
+      this.weaponCooldownSlow = weapon.weaponCooldownSlow
       this.game.add.existing(weapon)
     }
 

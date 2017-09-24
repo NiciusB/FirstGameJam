@@ -11,6 +11,7 @@ class Staff extends Phaser.Sprite {
     this.attackRange = 125
     this.attackPower = 30 + this.game.floor * 5
     this.weaponCooldown = 600
+    this.weaponCooldownSlow = 300
     this.delay = 150
   }
 
