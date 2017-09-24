@@ -1,10 +1,13 @@
 class Staff extends Phaser.Sprite {
-  constructor(player, mousePos) {
+  constructor(player, mouseDelta) {
     super(player.game, player.x, player.y, 'fire_1')
     this.player = player
-    this.mousePos = mousePos
+    this.mouseDelta = mouseDelta
+    this.initialPos = new Phaser.Point(player.x, player.y)
     // Attributes
     this.speed = 100
+    this.maxRange = 500
+    this.speedGain = 200
     this.attackRange = 125
     this.attackPower = 45
     this.delay = 300
@@ -15,10 +18,17 @@ class Staff extends Phaser.Sprite {
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
     if (this.delay > 0) this.delay -= delta
     if (this.alive && this.delay <= 0) {
-      const dir = new Phaser.Point(this.mousePos.x - this.x, this.mousePos.y - this.y).normalize()
-      this.x += dir.x * (this.speed / delta)
-      this.y += dir.y * (this.speed / delta)
-      if (Phaser.Math.distance(this.x, this.y, this.mousePos.x, this.mousePos.y) <= 10) {
+      this.speed += this.speedGain / delta
+      this.x += this.mouseDelta.x * (this.speed / delta)
+      this.y += this.mouseDelta.y * (this.speed / delta)
+      if (
+        Phaser.Math.distance(this.initialPos.x, this.initialPos.y, this.x, this.y) > this.maxRange ||
+        this.x < this.game.world.bounds.left ||
+        this.x > this.game.world.bounds.right ||
+        this.y < this.game.world.bounds.top ||
+        this.y > this.game.world.bounds.bottom ||
+        this.stuffInRange(0.4).length > 0
+      ) {
         this.kill()
       }
     }
@@ -32,12 +42,30 @@ class Staff extends Phaser.Sprite {
       explosion.kill()
     }, this, explosion)
 
-    this.game.enemySpawner.children.forEach(val => {
-      if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange) {
-        val.damage(this.attackPower)
-      }
+    this.enemiesInRange().forEach(enemy => {
+      enemy.damage(this.attackPower)
     })
     super.kill()
+  }
+
+  enemiesInRange(rangeMultiplier = 1) {
+    var enemies = []
+    this.game.enemySpawner.children.forEach(val => {
+      if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange * rangeMultiplier) {
+        enemies.push(val)
+      }
+    })
+    return enemies
+  }
+
+  stuffInRange(rangeMultiplier = 1) {
+    var stuff = []
+    this.game.physics.p2.getBodies().forEach(val => {
+      if (val && val.sprite && val.sprite != this.game.player && Phaser.Math.distance(val.sprite.x, val.sprite.y, this.x, this.y) <= this.attackRange * rangeMultiplier) {
+        stuff.push(val.sprite)
+      }
+    })
+    return stuff
   }
 }
 module.exports = Staff

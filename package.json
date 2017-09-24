@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.4",
-    "phaser-ce": "^2.8.7"
+    "phaser-ce": "^2.8.7",
+    "lockr": "^0.8.4"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

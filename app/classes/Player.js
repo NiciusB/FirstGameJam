@@ -1,6 +1,7 @@
 import Alive from './Alive.js'
 import Dagger from './Dagger.js'
 import Staff from './Staff.js'
+import Lockr from 'lockr'
 
 class Player extends Alive {
   constructor(game, x, y) {
@@ -51,15 +52,15 @@ class Player extends Alive {
     if (this.weaponCooldown > 0) this.weaponCooldown -= delta
     const mouse = this.game.input.mousePointer
     if (this.weaponCooldown <= 0 && mouse.isDown) {
+      const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
       switch (this.weapon) {
         case 'dagger':
           this.weaponCooldown = 300
-          const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
           this.game.add.existing(new Dagger(this, mouseDelta))
           break
         case 'staff':
           this.weaponCooldown = 500
-          this.game.add.existing(new Staff(this, new Phaser.Point(mouse.worldX, mouse.worldY)))
+          this.game.add.existing(new Staff(this, mouseDelta))
           break
       }
     }

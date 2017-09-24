@@ -2,6 +2,7 @@ var playerHp, fps, weaponInfo;
 import Player from './Player.js'
 import EnemySpawner from './EnemySpawner.js'
 import RoomCreator from './RoomCreator.js'
+import Lockr from 'lockr'
 
 class GameState extends Phaser.State {
   constructor() {
