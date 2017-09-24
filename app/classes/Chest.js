@@ -1,3 +1,5 @@
+import Potions from './Potions.js'
+
 class Chest extends Phaser.Sprite {
   constructor(game, x, y) {
     super(game, x, y, 'cofre')
@@ -20,7 +22,7 @@ class Chest extends Phaser.Sprite {
         this.weapon = Math.random() < 0.33 ? 'dagger' : (Math.random() < 0.66 ? 'dagger' : 'book')
         break
       case 'potion':
-        this.potion = Math.random() < 0.8 ? 'heal' : 'damage'
+        this.potion = Math.random() < 0.25 ? 'givehealth' : (Math.random() < 0.5 ? 'stealhealth' : (Math.random() < 0.75 ? 'givemovespeed' : 'stealmovespeed'))
         break
     }
   }
@@ -50,14 +52,20 @@ class Chest extends Phaser.Sprite {
         break
       case 'potion':
         this.openCooldown = 1e5
-        switch (this.potion) {
-          case 'heal':
-            this.game.player.heal(20)
-            break
-          case 'damage':
-            this.game.player.damage(20)
-            break
+        var done = false
+        if (!this.game.player.potions[0]) {
+          done = true
+          this.game.player.potions[0] = this.potion
         }
+        if (!done && !this.game.player.potions[1]) {
+          done = true
+          this.game.player.potions[1] = this.potion
+        }
+        if (!done && !this.game.player.potions[2]) {
+          done = true
+          this.game.player.potions[2] = this.potion
+        }
+        if (!done) Potions(this.game.player, this.potion)
         break
     }
   }

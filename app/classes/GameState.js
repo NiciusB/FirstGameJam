@@ -17,7 +17,8 @@ class GameState extends Phaser.State {
     this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 120, 131)
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 72, 100)
     this.load.spritesheet('golemSprite', 'assets/images/golemSprite.png', 126, 187)
-    this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
+    this.load.image('fire_1', 'assets/images/fire_1.png')
+    this.load.spritesheet('potion', 'assets/images/potion.png', 14, 20)
     this.load.image('dagger', 'assets/images/dagger.png')
     this.load.image('bastonGUI', 'assets/images/gui/baston.png')
     this.load.image('dagaGUI', 'assets/images/gui/daga.png')
@@ -44,6 +45,7 @@ class GameState extends Phaser.State {
 
     this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
     if (currGame) {
+      this.game.player.potions =  currGame.potions
       this.game.player.health = currGame.health
       this.game.player.changeWeapon(currGame.weapon)
     }
@@ -68,6 +70,7 @@ class GameState extends Phaser.State {
     Lockr.set('currentGame', {
       health: this.game.player.health,
       weapon: this.game.player.weapon,
+      potions: this.game.player.potions,
       floor: this.game.floor + 1
     })
     this.game.state.start('InterFloorState')
