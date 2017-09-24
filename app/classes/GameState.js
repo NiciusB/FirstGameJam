@@ -1,4 +1,4 @@
-var playerHp;
+var playerHp, fps;
 import Player from './Player.js'
 import Skeleton from './Skeleton.js'
 
@@ -18,17 +18,23 @@ class GameState extends Phaser.State {
   }
 
   create() {
+    this.game.time.advancedTiming = true
+    
     const worldWidth = 3840
     const worldHeight = 600
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.defaultRestitution = 0.9
     this.game.world.setBounds(60, 10, worldWidth - 60 * 2, worldHeight - 80)
-
     this.game.add.sprite(0, 0, 'stage01')
 
-    playerHp = this.game.add.text(10, 10, '', { font: "bold 32px Arial", fill: "#fff" })
+    playerHp = this.game.add.text(10, 10, '', { font: "bold 30px Arial", fill: "#fff" })
     playerHp.fixedToCamera = true
     playerHp.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
+
+    fps = this.game.add.text(this.game.width - 10, 10, '', { font: "bold 15px Arial", fill: "#fff" })
+    fps.anchor.x = 1
+    fps.fixedToCamera = true
+    fps.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
 
     var mesa = this.game.add.sprite(300, this.game.world.centerY, 'mesa_1')
     this.game.physics.p2.enable(mesa)
@@ -45,6 +51,7 @@ class GameState extends Phaser.State {
 
   update() {
     playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
+    fps.text = this.game.time.fps + ' FPS'
   }
 
   gameOver() {
