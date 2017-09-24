@@ -1,7 +1,6 @@
 import Alive from './Alive.js'
 import Dagger from './Dagger.js'
 import Staff from './Staff.js'
-import Lockr from 'lockr'
 
 class Player extends Alive {
   constructor(game, x, y) {
@@ -25,6 +24,8 @@ class Player extends Alive {
   update() {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+
+    if (this.x > this.game.world.width - 50) this.game.state.getCurrentState().endRoom()
 
     var hasMoved = false
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.S)) {
