@@ -22,7 +22,7 @@ class GameState extends Phaser.State {
     const worldHeight = 600
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.defaultRestitution = 0.9
-    this.game.world.setBounds(60, 60, worldWidth - 60 * 2, worldHeight - 60 * 2)
+    this.game.world.setBounds(60, 10, worldWidth - 60 * 2, worldHeight - 80)
 
     this.game.add.sprite(0, 0, 'stage01')
 

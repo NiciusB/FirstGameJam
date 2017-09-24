@@ -47,9 +47,11 @@ class Player extends Alive {
       hasMoved = true
     }
     if (this.daggerCooldown > 0) this.daggerCooldown -= delta
-    if (this.daggerCooldown <= 0 && this.game.input.keyboard.isDown(Phaser.KeyCode.SPACEBAR)) {
-      this.daggerCooldown = 500
-      this.game.add.existing(new Dagger(this))
+    const mouse = this.game.input.mousePointer
+    if (this.daggerCooldown <= 0 && mouse.isDown) {
+      this.daggerCooldown = 300
+      const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
+      this.game.add.existing(new Dagger(this, mouseDelta))
     }
 
     if (!hasMoved) this.play('standing')

@@ -1,20 +1,24 @@
 import Enemy from './Enemy.js'
-
 class Dagger extends Phaser.Sprite {
-  constructor(player) {
-    super(player.game, player.right - 20 * player.scale.x, player.y, 'dagger')
+  constructor(player, mouseDelta) {
+    super(player.game, player.x, player.y, 'dagger')
+    this.visible = false
     this.player = player
-    this.anchor.set(1)
-    this.scale.x = player.scale.x
+    this.mouseDelta = mouseDelta
+    this.rotation = mouseDelta.angle(new Phaser.Point(0, 0))
     this.game.time.events.add(100, this.kill, this)
-    
+    this.scale.set(2)
+
     // Attributes
-    this.attackRange = 80
+    this.attackRange = 115
   }
 
   update() {
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
-    this.angle += this.scale.x * 180 / (100 / delta)
+    this.visible = this.alive
+    this.x = this.player.x + this.mouseDelta.x * 40
+    this.y = this.player.y + this.mouseDelta.y * 70
+    this.angle += 180 / (100 / delta)
   }
   kill() {
     this.game.enemies.forEach(val => {
