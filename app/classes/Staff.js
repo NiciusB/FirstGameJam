@@ -5,13 +5,13 @@ class Staff extends Phaser.Sprite {
     this.mouseDelta = mouseDelta
     this.initialPos = new Phaser.Point(player.x, player.y)
     // Attributes
-    this.speed = 100
+    this.speed = 0
     this.maxRange = 500
     this.speedGain = 200
     this.attackRange = 125
-    this.attackPower = 30 + this.game.floor * 10
+    this.attackPower = 30 + this.game.floor * 5
     this.weaponCooldown = 600
-    this.delay = 300
+    this.delay = 150
   }
 
   update() {

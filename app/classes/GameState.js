@@ -20,6 +20,8 @@ class GameState extends Phaser.State {
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 72, 100)
     this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
     this.load.image('dagger', 'assets/images/dagger.png')
+    this.load.image('bastonGUI', 'assets/images/gui/baston.png')
+    this.load.image('dagaGUI', 'assets/images/gui/daga.png')
     // bone 22, 22
   }
 

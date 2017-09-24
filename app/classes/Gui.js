@@ -12,17 +12,17 @@ class Gui extends Phaser.Group {
     this.fps.fixedToCamera = true
     this.fps.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
 
-    this.weaponInfo = this.add(new Phaser.Text(game, 10, this.game.height - 10, '', { font: "bold 15px Arial", fill: "#fff" }))
+    this.weaponInfo = this.add(new Phaser.Sprite(game, 10, this.game.height - 10, 'bastonGUI'))
     this.weaponInfo.anchor.y = 1
     this.weaponInfo.fixedToCamera = true
-    this.weaponInfo.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
   }
 
   update() {
     super.update()
     this.playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
     this.fps.text = this.game.time.fps + ' FPS'
-    this.weaponInfo.text = this.game.player.weapon
+    var images = { dagger: 'dagaGUI', staff: 'bastonGUI' }
+    this.weaponInfo.loadTexture(images[this.game.player.weapon], 0)
   }
 }
 module.exports = Gui
