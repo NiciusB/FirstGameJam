@@ -10,13 +10,13 @@ module.exports = (player, potionname) => {
       case 'givemovespeed':
         player.speed += 50
         player.game.time.events.add(10000, () => {
-          player.speed -= 50
+          player.speed -= 40
         }, this)
         break
       case 'stealmovespeed':
         player.speed -= 25
         player.game.time.events.add(10000, () => {
-          player.speed += 25
+          player.speed += 20
         }, this)
         break
     }
