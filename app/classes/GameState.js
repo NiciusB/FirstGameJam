@@ -2,6 +2,7 @@ var playerHp, fps, weaponInfo;
 import Player from './Player.js'
 import EnemySpawner from './EnemySpawner.js'
 import RoomCreator from './RoomCreator.js'
+import Lockr from 'lockr'
 
 class GameState extends Phaser.State {
   constructor() {
@@ -23,13 +24,13 @@ class GameState extends Phaser.State {
 
   create() {
     this.game.time.advancedTiming = true
-    
+
     const worldWidth = 3840
     const worldHeight = 600
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.defaultRestitution = 0.9
     this.game.world.setBounds(60, 10, worldWidth - 60 * 2, worldHeight - 80)
-    
+
     this.game.RoomCreator = new RoomCreator(this.game)
     this.add.existing(this.game.RoomCreator)
 
@@ -54,6 +55,8 @@ class GameState extends Phaser.State {
 
     this.game.enemySpawner = new EnemySpawner(this.game)
     this.add.existing(this.game.enemySpawner)
+
+    this.loadCurrentGame()
   }
 
   update() {
@@ -64,6 +67,21 @@ class GameState extends Phaser.State {
 
   gameOver() {
     this.game.state.start('GameState')
+  }
+
+  endRoom() {
+    this.game.state.start('GameState')
+    Lockr.set('currentGame', {
+      health: this.game.player.health
+    })
+  }
+
+  loadCurrentGame() {
+    var currGame = Lockr.get('currentGame', false)
+    if (currGame) {
+      Lockr.rm('currentGame')
+      this.game.player.health = currGame.health
+    }
   }
 }
 

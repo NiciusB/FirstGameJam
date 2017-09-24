@@ -25,6 +25,8 @@ class Player extends Alive {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
 
+    if (this.x > this.game.world.width - 50) this.game.state.getCurrentState().endRoom()
+
     var hasMoved = false
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.S)) {
       this.body.moveDown(this.speed)
@@ -51,15 +53,15 @@ class Player extends Alive {
     if (this.weaponCooldown > 0) this.weaponCooldown -= delta
     const mouse = this.game.input.mousePointer
     if (this.weaponCooldown <= 0 && mouse.isDown) {
+      const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
       switch (this.weapon) {
         case 'dagger':
           this.weaponCooldown = 300
-          const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
           this.game.add.existing(new Dagger(this, mouseDelta))
           break
         case 'staff':
           this.weaponCooldown = 500
-          this.game.add.existing(new Staff(this, new Phaser.Point(mouse.worldX, mouse.worldY)))
+          this.game.add.existing(new Staff(this, mouseDelta))
           break
       }
     }
