@@ -1,3 +1,5 @@
+import Chest from './Chest.js'
+
 class RoomCreator extends Phaser.Group {
   constructor(game) {
     super(game, null, 'decoration')
@@ -44,6 +46,12 @@ class RoomCreator extends Phaser.Group {
     }
 
     for (var n = 0; n < 4; n++) {
+      var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 100 + Math.random() * (world.height - 150))
+      if (this.checkCloseObjects(randomPos, 100)) {
+        const cofre = this.add(new Chest(this.game, randomPos.x, randomPos.y))
+        this.game.physics.p2.enable(cofre)
+        cofre.body.kinematic = true
+      } else n--
     }
   }
 
