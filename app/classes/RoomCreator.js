@@ -17,10 +17,11 @@ class RoomCreator extends Phaser.Group {
     }
 
     for (var n = 0; n < 4; n++) {
-      var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 40)
+      var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 70)
       if (this.checkCloseObjects(randomPos, 100)) {
         const estanteria = this.create(randomPos.x, randomPos.y, 'estanteria')
         this.game.physics.p2.enable(estanteria)
+        estanteria.scale.set(1.4)
         estanteria.body.kinematic = true
       } else n--
     }

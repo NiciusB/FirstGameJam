@@ -5,7 +5,7 @@ class EnemySpawner extends Phaser.Group {
     super(game, null, 'enemies')
     this.game = game
     for (var n = 0; n < 20; n++) {
-      var randomPos = new Phaser.Point(60 + Math.random() * (this.game.world.width - 60 * 2), 60 + Math.random() * (this.game.world.height - 60 * 2))
+      var randomPos = new Phaser.Point(400 + Math.random() * (this.game.world.width - 460), 60 + Math.random() * (this.game.world.height - 60 * 2))
       if (this.checkCloseObjects(randomPos, 150)) {
         this.add(new Skeleton(this, randomPos.x, randomPos.y))
       } else n--

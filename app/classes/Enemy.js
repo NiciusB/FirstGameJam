@@ -52,9 +52,17 @@ class Enemy extends Alive {
         if (Math.round(this.x / closeEnough) != Math.round(this.objective.x / closeEnough)) {
           if (this.x > this.objective.x) {
             this.body.moveLeft(this.speed)
+            this.scale.x = -1
+            this.children.forEach(val => {
+              val.scale.x = -1
+            })
             this.play('walking')
           } else {
             this.body.moveRight(this.speed)
+            this.scale.x = 1
+            this.children.forEach(val => {
+              val.scale.x = 1
+            })
             this.play('walking')
           }
         }
