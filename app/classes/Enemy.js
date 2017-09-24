@@ -5,6 +5,10 @@ class Enemy extends Alive {
     game.physics.p2.enable(this)
     this.body.fixedRotation = true
     this.game.enemies.push(this)
+    
+    this.hpBar = this.addChild(game.add.text(0, - this.height / 2, 'hp'))
+    this.hpBar.anchor.setTo(0.5, 0.65)
+
     // Attributes
     this.speed = 0
     this.meleeAttackRange = false
@@ -18,6 +22,7 @@ class Enemy extends Alive {
   update() {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+    this.hpBar.text = this.health
 
     if (this.body.velocity.x !== 0) {
       this.scale.x = this.body.velocity.x > 0 ? 1 : -1

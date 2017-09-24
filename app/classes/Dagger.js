@@ -1,4 +1,3 @@
-import Enemy from './Enemy.js'
 class Dagger extends Phaser.Sprite {
   constructor(player, mouseDelta) {
     super(player.game, player.x, player.y, 'dagger')
@@ -7,10 +6,9 @@ class Dagger extends Phaser.Sprite {
     this.mouseDelta = mouseDelta
     this.rotation = mouseDelta.angle(new Phaser.Point(0, 0))
     this.game.time.events.add(100, this.kill, this)
-    this.scale.set(2)
 
     // Attributes
-    this.attackRange = 115
+    this.attackRange = 100
   }
 
   update() {
@@ -23,7 +21,7 @@ class Dagger extends Phaser.Sprite {
   kill() {
     this.game.enemies.forEach(val => {
       if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange) {
-        val.damage(100)
+        val.damage(25)
       }
     })
     super.kill()

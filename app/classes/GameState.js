@@ -1,4 +1,4 @@
-var playerHp, fps;
+var playerHp, fps, weaponInfo;
 import Player from './Player.js'
 import Skeleton from './Skeleton.js'
 
@@ -36,6 +36,11 @@ class GameState extends Phaser.State {
     fps.fixedToCamera = true
     fps.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
 
+    weaponInfo = this.game.add.text(this.game.width - 10, 30, '', { font: "bold 15px Arial", fill: "#fff" })
+    weaponInfo.anchor.x = 1
+    weaponInfo.fixedToCamera = true
+    weaponInfo.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
+
     var mesa = this.game.add.sprite(300, this.game.world.centerY, 'mesa_1')
     this.game.physics.p2.enable(mesa)
     mesa.body.kinematic = true
@@ -52,6 +57,7 @@ class GameState extends Phaser.State {
   update() {
     playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
     fps.text = this.game.time.fps + ' FPS'
+    weaponInfo.text = this.game.player.weapon
   }
 
   gameOver() {
