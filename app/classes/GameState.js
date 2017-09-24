@@ -24,6 +24,8 @@ class GameState extends Phaser.State {
   }
 
   create() {
+    var currGame = this.loadCurrentGame()
+
     this.game.time.advancedTiming = true
 
     const worldWidth = 3840
@@ -39,14 +41,17 @@ class GameState extends Phaser.State {
     this.add.existing(this.game.Gui)
 
     this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
+    if (currGame) {
+      this.game.player.health = currGame.health
+      this.game.player.weapon = currGame.weapon
+    }
+
     this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)
     this.game.camera.bounds.setTo(0, 0, worldWidth, worldHeight)
     this.game.camera.lerp.set(0.2)
 
     this.game.enemySpawner = new EnemySpawner(this.game)
     this.add.existing(this.game.enemySpawner)
-
-    this.loadCurrentGame()
   }
 
   update() {
@@ -70,12 +75,11 @@ class GameState extends Phaser.State {
     var currGame = Lockr.get('currentGame', false)
     if (currGame) {
       Lockr.rm('currentGame')
-      this.game.player.health = currGame.health
-      this.game.player.weapon = currGame.weapon
       this.game.floor = currGame.floor
     } else {
       this.game.floor = 1
     }
+    return currGame
   }
 }
 
