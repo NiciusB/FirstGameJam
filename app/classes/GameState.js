@@ -1,6 +1,6 @@
 var playerHp, fps, weaponInfo;
 import Player from './Player.js'
-import Skeleton from './Skeleton.js'
+import EnemySpawner from './EnemySpawner.js'
 
 class GameState extends Phaser.State {
   constructor() {
@@ -11,7 +11,7 @@ class GameState extends Phaser.State {
     this.load.image('stage01', 'assets/images/stage/fondo_1.png')
     this.load.image('mesa_1', 'assets/images/stage/mesa_1.png')
     this.load.image('dagger', 'assets/images/dagger.png')
-    this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 83, 141)
+    this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 85, 150)
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 72, 100)
     this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
     // bone 22, 22
@@ -49,12 +49,13 @@ class GameState extends Phaser.State {
     this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)
     this.game.camera.bounds.setTo(0, 0, worldWidth, worldHeight)
 
-
-    this.game.enemies = []
-    var skeleton = this.add.existing(new Skeleton(this.game, 600, this.game.world.randomY))
+    this.game.enemySpawner = new EnemySpawner(this.game)
+    this.add.existing(this.game.enemySpawner)
   }
 
   update() {
+    this.game.enemySpawner.update()
+
     playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
     fps.text = this.game.time.fps + ' FPS'
     weaponInfo.text = this.game.player.weapon

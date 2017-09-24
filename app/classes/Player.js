@@ -1,5 +1,6 @@
 import Alive from './Alive.js'
 import Dagger from './Dagger.js'
+import Staff from './Staff.js'
 
 class Player extends Alive {
   constructor(game, x, y) {
@@ -13,7 +14,7 @@ class Player extends Alive {
     this.health = this.maxHealth = 100
 
     this.weaponCooldown = 0
-    this.weapon = 'dagger'
+    this.weapon = 'staff'
 
     this.animations.add('standing', [0], 0, false)
     this.animations.add('walking', [1, 2], 5, false)
@@ -55,6 +56,10 @@ class Player extends Alive {
           this.weaponCooldown = 300
           const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
           this.game.add.existing(new Dagger(this, mouseDelta))
+          break
+        case 'staff':
+          this.weaponCooldown = 500
+          this.game.add.existing(new Staff(this, new Phaser.Point(mouse.worldX, mouse.worldY)))
           break
       }
     }

@@ -19,7 +19,7 @@ class Dagger extends Phaser.Sprite {
     this.angle += 180 / (100 / delta)
   }
   kill() {
-    this.game.enemies.forEach(val => {
+    this.game.enemySpawner.children.forEach(val => {
       if (Phaser.Math.distance(val.x, val.y, this.x, this.y) <= this.attackRange) {
         val.damage(25)
       }

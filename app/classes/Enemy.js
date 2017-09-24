@@ -1,12 +1,12 @@
 import Alive from './Alive.js'
 class Enemy extends Alive {
-  constructor(game, x, y, sprite) {
-    super(game, x, y, sprite)
-    game.physics.p2.enable(this)
+  constructor(spawner, x, y, sprite) {
+    super(spawner.game, x, y, sprite)
+    this.spawner = spawner
+    this.game.physics.p2.enable(this)
     this.body.fixedRotation = true
-    this.game.enemies.push(this)
     
-    this.hpBar = this.addChild(game.add.text(0, - this.height / 2, 'hp'))
+    this.hpBar = this.addChild(this.game.add.text(0, - this.height / 2, 'hp'))
     this.hpBar.anchor.setTo(0.5, 0.65)
 
     // Attributes
@@ -65,7 +65,6 @@ class Enemy extends Alive {
   }
 
   kill() {
-    this.game.enemies.splice(this.game.enemies.indexOf(this), 1)
     super.kill()
   }
 }
