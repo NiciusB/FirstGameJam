@@ -14,12 +14,14 @@ class EnemySpawner extends Phaser.Group {
 
   update() {
     super.update()
+    /*
     while (this.children.length < 5) {
       var randomPos = new Phaser.Point(60 + Math.random() * (this.game.world.width - 60 * 2), 60 + Math.random() * (this.game.world.height - 60 * 2))
       if (this.checkCloseObjects(randomPos, 200)) {
         this.add(new Skeleton(this, randomPos.x, randomPos.y))
       }
     }
+    */
   }
 
   checkCloseObjects(point, maxDistance) {

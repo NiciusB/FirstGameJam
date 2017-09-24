@@ -14,7 +14,7 @@ class Player extends Alive {
     this.health = this.maxHealth = 100
 
     this.weaponCooldown = 0
-    this.weapon = 'staff'
+    this.weapon = 'dagger'
 
     this.animations.add('standing', [0], 0, false)
     this.animations.add('walking', [1, 2], 5, false)
@@ -54,16 +54,17 @@ class Player extends Alive {
     const mouse = this.game.input.mousePointer
     if (this.weaponCooldown <= 0 && mouse.isDown) {
       const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
+      var weapon
       switch (this.weapon) {
         case 'dagger':
-          this.weaponCooldown = 300
-          this.game.add.existing(new Dagger(this, mouseDelta))
+          weapon = new Dagger(this, mouseDelta)
           break
         case 'staff':
-          this.weaponCooldown = 500
-          this.game.add.existing(new Staff(this, mouseDelta))
+          weapon = new Staff(this, mouseDelta)
           break
       }
+      this.weaponCooldown = weapon.weaponCooldown
+      this.game.add.existing(weapon)
     }
 
     if (!hasMoved) this.play('standing')
