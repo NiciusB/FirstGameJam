@@ -9,8 +9,9 @@ class RoomCreator extends Phaser.Group {
     this.game.add.sprite(0, 0, 'stage01')
     this.floor = this.addChild(this.game.make.group())
     this.game.behindEverything = this.addChild(this.game.make.group())
-
+    var steps = 0
     for (var n = 0; n < 4; n++) {
+      if(steps++ > 10000) break
       var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 600), 150 + Math.random() * (world.height - 250))
       if (this.checkCloseObjects(randomPos, 300, 'alfombra')) {
         const alfombra = this.floor.create(randomPos.x, randomPos.y, 'alfombra_1')
@@ -20,8 +21,9 @@ class RoomCreator extends Phaser.Group {
       } else n--
     }
 
-
+    steps = 0
     for (var n = 0; n < 4; n++) {
+      if(steps++ > 10000) break
       var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 70)
       if (this.checkCloseObjects(randomPos, 100)) {
         const estanteria = this.create(randomPos.x, randomPos.y, 'estanteria')
@@ -30,8 +32,9 @@ class RoomCreator extends Phaser.Group {
         estanteria.body.kinematic = true
       } else n--
     }
-
+    steps = 0
     for (var n = 0; n < 8; n++) {
+      if(steps++ > 10000) break
       var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 100 + Math.random() * (world.height - 150))
       if (this.checkCloseObjects(randomPos, 250)) {
         const sprite = Math.random() < 0.5 ? 'mesa_1' : 'mesa_2'
@@ -47,8 +50,9 @@ class RoomCreator extends Phaser.Group {
         mesa.body.kinematic = true
       } else n--
     }
-
+    steps = 0
     for (var n = 0; n < 4; n++) {
+      if(steps++ > 10000) break
       var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 100 + Math.random() * (world.height - 150))
       if (this.checkCloseObjects(randomPos, 100)) {
         const cofre = this.add(new Chest(this.game, randomPos.x, randomPos.y))
