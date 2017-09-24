@@ -7,7 +7,7 @@ class Skeleton extends Enemy {
 
     // Attributes
     this.health = this.maxHealth = 100
-    this.speed = 125
+    this.speed = 150
     this.meleeAttackRange = 70
     this.meleeAttackPower = 15
     this.meleeTTA = 500
