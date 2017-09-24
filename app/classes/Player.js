@@ -5,7 +5,7 @@ import Staff from './Staff.js'
 class Player extends Alive {
   constructor(game, x, y) {
     super(game, x, y, 'playerSprite')
-    game.physics.p2.enable(this, true)
+    game.physics.p2.enable(this)
     this.body.fixedRotation = true
     this.body.clearShapes()
     this.body.addRectangle(50, 100, 0, 25)
