@@ -14,7 +14,6 @@ class Player extends Alive {
 
     this.speed = 300
     this.health = this.maxHealth = 100
-
     this.potions = [false, false, false]
 
     this.weaponCooldown = 0
@@ -73,7 +72,7 @@ class Player extends Alive {
     if (this.weaponCooldownSlow > 0) this.weaponCooldownSlow -= delta
     const mouse = this.game.input.mousePointer
     if (this.weaponCooldown <= 0 && mouse.isDown) {
-      const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize(1)
+      const mouseDelta = new Phaser.Point(mouse.worldX - this.x, mouse.worldY - this.y).normalize()
       this.scale.x = mouseDelta.x > 0 ? 1 : -1
       var weapon
       switch (this.weapon) {

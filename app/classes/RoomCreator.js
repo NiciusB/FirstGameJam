@@ -3,11 +3,9 @@ import Chest from './Chest.js'
 class RoomCreator extends Phaser.Group {
   constructor(game) {
     super(game, null, 'decoration')
-    this.game = game
     const world = this.game.world
 
     this.game.add.sprite(0, 0, 'stage01')
-    console.log(this.game.world.width)
     var puerta = this.game.add.sprite(this.game.world.width + 115, this.game.world.centerY, 'puerta')
     puerta.anchor.setTo(1, 0.5)
     this.floor = this.addChild(this.game.make.group())

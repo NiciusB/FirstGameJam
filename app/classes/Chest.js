@@ -1,4 +1,4 @@
-import Potions from './Potions.js'
+import potions from './Potions.js'
 
 class Chest extends Phaser.Sprite {
   constructor(game, x, y) {
@@ -11,9 +11,8 @@ class Chest extends Phaser.Sprite {
     this.game.physics.p2.enable(this)
     this.body.kinematic = true
 
-    this.hint = this.addChild(this.game.make.text(0, - this.height / 2, 'E', { fill: '#aaa' }))
+    this.hint = this.addChild(this.game.make.text(0, - this.height / 2, 'E', { fill: '#aaa', font: 'Asap' }))
     this.hint.anchor.setTo(0.5, 0.8)
-    this.hint.font = 'Asap'
 
     // Attributes
     this.type = Math.random() < 0.4 ? 'weapon' : 'potion'
@@ -65,7 +64,7 @@ class Chest extends Phaser.Sprite {
           done = true
           this.game.player.potions[2] = this.potion
         }
-        if (!done) Potions(this.game.player, this.potion)
+        if (!done) potions(this.game.player, this.potion)
         break
     }
   }
