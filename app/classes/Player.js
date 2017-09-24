@@ -48,19 +48,6 @@ class Player extends Alive {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
 
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.ONE)) {
-      Potions(this, this.potions[0])
-      this.potions[0] = false
-    }
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.TWO)) {
-      Potions(this, this.potions[1])
-      this.potions[1] = false
-    }
-    if (this.game.input.keyboard.isDown(Phaser.KeyCode.THREE)) {
-      Potions(this, this.potions[2])
-      this.potions[2] = false
-    }
-
     if (this.x > this.game.world.width - 50) this.game.state.getCurrentState().endRoom()
 
     var hasMoved = false
@@ -81,6 +68,18 @@ class Player extends Alive {
       if (!this.isPlayingAttackAnimation()) this.scale.x = 1
       this.body.moveRight(this.getSpeed())
       hasMoved = true
+    }
+    if (this.game.input.keyboard.isDown(Phaser.KeyCode.ONE)) {
+      Potions(this, this.potions[0])
+      this.potions[0] = false
+    }
+    if (this.game.input.keyboard.isDown(Phaser.KeyCode.TWO)) {
+      Potions(this, this.potions[1])
+      this.potions[1] = false
+    }
+    if (this.game.input.keyboard.isDown(Phaser.KeyCode.THREE)) {
+      Potions(this, this.potions[2])
+      this.potions[2] = false
     }
     if (this.weaponCooldown > 0) this.weaponCooldown -= delta
     if (this.weaponCooldownSlow > 0) this.weaponCooldownSlow -= delta
