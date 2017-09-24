@@ -1,7 +1,7 @@
-var playerHp, fps, weaponInfo;
 import Player from './Player.js'
 import EnemySpawner from './EnemySpawner.js'
 import RoomCreator from './RoomCreator.js'
+import Gui from './Gui.js'
 import Lockr from 'lockr'
 
 class GameState extends Phaser.State {
@@ -34,19 +34,8 @@ class GameState extends Phaser.State {
     this.game.RoomCreator = new RoomCreator(this.game)
     this.add.existing(this.game.RoomCreator)
 
-    playerHp = this.game.add.text(10, 10, '', { font: "bold 30px Arial", fill: "#fff" })
-    playerHp.fixedToCamera = true
-    playerHp.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
-
-    fps = this.game.add.text(this.game.width - 10, 10, '', { font: "bold 15px Arial", fill: "#fff" })
-    fps.anchor.x = 1
-    fps.fixedToCamera = true
-    fps.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
-
-    weaponInfo = this.game.add.text(this.game.width - 10, 30, '', { font: "bold 15px Arial", fill: "#fff" })
-    weaponInfo.anchor.x = 1
-    weaponInfo.fixedToCamera = true
-    weaponInfo.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
+    this.game.Gui = new Gui(this.game)
+    this.add.existing(this.game.Gui)
 
     this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
     this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)
@@ -60,20 +49,19 @@ class GameState extends Phaser.State {
   }
 
   update() {
-    playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
-    fps.text = this.game.time.fps + ' FPS'
-    weaponInfo.text = this.game.player.weapon
+    super.update()
   }
 
   gameOver() {
-    this.game.state.start('GameState')
+    this.game.state.start('InterFloorState')
   }
 
   endRoom() {
-    this.game.state.start('GameState')
     Lockr.set('currentGame', {
-      health: this.game.player.health
+      health: this.game.player.health,
+      floor: this.game.floor + 1
     })
+    this.game.state.start('InterFloorState')
   }
 
   loadCurrentGame() {
@@ -81,6 +69,9 @@ class GameState extends Phaser.State {
     if (currGame) {
       Lockr.rm('currentGame')
       this.game.player.health = currGame.health
+      this.game.floor = currGame.floor
+    } else {
+      this.game.floor = 1
     }
   }
 }

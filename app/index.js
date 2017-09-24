@@ -12,7 +12,7 @@ window.Phaser = require('phaser-ce/build/custom/phaser-split')
 
 var game = new Phaser.Game(960, 600, Phaser.CANVAS, 'phaser-game', null, false, false)
 
-const GameState = require('classes/GameState.js')
-game.state.add('GameState', GameState)
+game.state.add('GameState', require('classes/GameState.js'))
+game.state.add('InterFloorState', require('classes/InterFloorState.js'))
 
-game.state.start('GameState')
+game.state.start('InterFloorState')
