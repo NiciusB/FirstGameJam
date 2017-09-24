@@ -14,7 +14,7 @@ class Player extends Alive {
     this.health = this.maxHealth = 100
 
     this.weaponCooldown = 0
-    this.weapon = 'staff'
+    this.weapon = 'dagger'
 
     this.animations.add('standing', [0], 0, false)
     this.animations.add('walking', [1, 2], 5, false)
