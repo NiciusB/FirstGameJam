@@ -20,7 +20,9 @@ class Player extends Alive {
     this.animations.add('walking', [1, 2], 5, false)
     this.play('standing')
   }
-
+  getSpeed() {
+    return this.speed / ((this.weaponCooldown) > 200 ? 3 : 1)
+  }
   update() {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
@@ -29,24 +31,24 @@ class Player extends Alive {
 
     var hasMoved = false
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.S)) {
-      this.body.moveDown(this.speed)
+      this.body.moveDown(this.getSpeed())
       this.play('walking')
       hasMoved = true
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.W)) {
-      this.body.moveUp(this.speed)
+      this.body.moveUp(this.getSpeed())
       this.play('walking')
       hasMoved = true
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.A)) {
-      this.body.moveLeft(this.speed)
+      this.body.moveLeft(this.getSpeed())
       this.scale.x = -1
       this.play('walking')
       hasMoved = true
     }
     if (this.game.input.keyboard.isDown(Phaser.KeyCode.D)) {
       this.scale.x = 1
-      this.body.moveRight(this.speed)
+      this.body.moveRight(this.getSpeed())
       this.play('walking')
       hasMoved = true
     }
