@@ -21,7 +21,7 @@ class Gui extends Phaser.Group {
     super.update()
     this.playerHp.text = (Math.round(this.game.player.health * 100) / 100) + ' HP'
     this.fps.text = this.game.time.fps + ' FPS'
-    var images = { dagger: 'dagaGUI', staff: 'bastonGUI' }
+    var images = { dagger: 'dagaGUI', staff: 'bastonGUI', book: 'bookGUI' }
     this.weaponInfo.loadTexture(images[this.game.player.weapon], 0)
   }
 }

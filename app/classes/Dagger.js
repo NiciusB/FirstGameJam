@@ -16,7 +16,7 @@ class Dagger extends Phaser.Sprite {
 
   update() {
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
-    this.visible = this.alive
+    // this.visible = this.alive // no time to create a vertical dagger sprite
     this.x = this.player.x + this.mouseDelta.x * 50
     this.y = this.player.y + this.mouseDelta.y * 50
     this.angle += 180 / (100 / delta)

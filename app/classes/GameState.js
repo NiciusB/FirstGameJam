@@ -12,6 +12,7 @@ class GameState extends Phaser.State {
     this.load.image('mesa_2', 'assets/images/stage/mesa_2.png')
     this.load.image('alfombra_1', 'assets/images/stage/alfombra_1.png')
     this.load.image('estanteria', 'assets/images/stage/estanteria.png')
+    this.load.spritesheet('lava', 'assets/images/stage/lava.png', 144, 156)
     this.load.spritesheet('cofre', 'assets/images/stage/cofre.png', 47, 37)
     this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 120, 131)
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 72, 100)
@@ -19,6 +20,7 @@ class GameState extends Phaser.State {
     this.load.image('dagger', 'assets/images/dagger.png')
     this.load.image('bastonGUI', 'assets/images/gui/baston.png')
     this.load.image('dagaGUI', 'assets/images/gui/daga.png')
+    this.load.image('bookGUI', 'assets/images/gui/book.png')
     // bone 22, 22
   }
 
@@ -32,7 +34,7 @@ class GameState extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.P2JS)
     this.game.physics.p2.defaultRestitution = 0.9
     this.game.world.setBounds(60, 10, worldWidth - 60 * 2, worldHeight - 80)
-
+    
     this.game.RoomCreator = new RoomCreator(this.game)
     this.add.existing(this.game.RoomCreator)
 

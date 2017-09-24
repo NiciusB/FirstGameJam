@@ -25,10 +25,10 @@ class Enemy extends Alive {
   update() {
     super.update()
     const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
-    this.hpBar.text = this.health
+    this.hpBar.text = Math.ceil(this.health)
     this.objectiveMs -= delta
     if (this.objectiveMs < 0) {
-      this.objectiveMs = 250 + Math.random() * 500
+      this.objectiveMs = 250 + Math.random() * 650
       this.objective.set(this.game.player.x, this.game.player.y)
     }
 

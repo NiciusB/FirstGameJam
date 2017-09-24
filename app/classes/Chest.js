@@ -17,7 +17,7 @@ class Chest extends Phaser.Sprite {
     this.type = Math.random() < 0.2 ? 'weapon' : 'potion'
     switch (this.type) {
       case 'weapon':
-        this.weapon = Math.random() < 0.5 ? 'dagger' : 'staff'
+        this.weapon = Math.random() < 0.33 ? 'dagger' : (Math.random() < 0.66 ? 'dagger' : 'book')
         break
       case 'potion':
         this.potion = Math.random() < 0.8 ? 'heal' : 'damage'

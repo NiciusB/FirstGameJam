@@ -49,6 +49,7 @@ class Staff extends Phaser.Sprite {
       enemy.damage(this.attackPower)
     })
     super.kill()
+    super.destroy()
   }
 
   enemiesInRange(rangeMultiplier = 1) {

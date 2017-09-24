@@ -1,6 +1,7 @@
 import Alive from './Alive.js'
 import Dagger from './Dagger.js'
 import Staff from './Staff.js'
+import Book from './Book.js'
 
 class Player extends Alive {
   constructor(game, x, y) {
@@ -23,11 +24,15 @@ class Player extends Alive {
       this.animations.add('standing', [10], 0, false)
       this.animations.add('walking', [11, 10, 12, 10], 5, false)
       this.animations.add('attacking', [10, 9, 8, 9], 10, false)
-    } else {
+    } else if (this.weapon === 'staff') {
       this.animations.add('standing', [3], 0, false)
       this.animations.add('walking', [4, 3, 5, 3], 5, false)
       this.animations.add('attacking', [7, 6, 7], 10, false)
-    }
+    } else if (this.weapon === 'book') {
+      this.animations.add('standing', [13], 0, false)
+      this.animations.add('walking', [14, 13, 15, 13], 5, false)
+      this.animations.add('attacking', [16, 17, 16], 10, false)
+    } else alert(weapon)
   }
   getSpeed() {
     return this.speed / ((this.weaponCooldownSlow) > 0 ? 3 : 1)
@@ -74,10 +79,13 @@ class Player extends Alive {
         case 'staff':
           weapon = new Staff(this, mouseDelta)
           break
+        case 'book':
+          weapon = new Book(this, mouse)
+          break
       }
       this.weaponCooldown = weapon.weaponCooldown
       this.weaponCooldownSlow = weapon.weaponCooldownSlow
-      this.game.add.existing(weapon)
+      this.game.behindEverything.addChild(weapon)
       this.play('attacking')
     }
 
