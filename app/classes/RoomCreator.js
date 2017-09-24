@@ -51,6 +51,7 @@ class RoomCreator extends Phaser.Group {
         const cofre = this.add(new Chest(this.game, randomPos.x, randomPos.y))
       } else n--
     }
+    this.add(new Chest(this.game, 100, 200))
   }
 
   update() {

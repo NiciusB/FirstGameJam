@@ -5,9 +5,6 @@ import Gui from './Gui.js'
 import Lockr from 'lockr'
 
 class GameState extends Phaser.State {
-  constructor() {
-    super()
-  }
 
   preload() {
     this.load.image('stage01', 'assets/images/stage/fondo_1.png')
@@ -45,7 +42,7 @@ class GameState extends Phaser.State {
     this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
     if (currGame) {
       this.game.player.health = currGame.health
-      this.changeWeapon(currGame.weapon)
+      this.game.player.changeWeapon(currGame.weapon)
     }
 
     this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)
@@ -61,7 +58,7 @@ class GameState extends Phaser.State {
   }
 
   gameOver() {
-    this.game.state.start('InterFloorState')
+    this.game.state.start('DeathState')
   }
 
   endRoom() {

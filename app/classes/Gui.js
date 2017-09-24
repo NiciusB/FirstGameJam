@@ -3,11 +3,11 @@ class Gui extends Phaser.Group {
     super(game, null, 'gui')
     this.game = game
 
-    this.playerHp = this.add(new Phaser.Text(game, 10, 10, '', { font: "bold 30px Arial", fill: "#fff" }))
+    this.playerHp = this.add(new Phaser.Text(game, 10, 10, '', { font: "bold 30px Asap", fill: "#fff" }))
     this.playerHp.fixedToCamera = true
     this.playerHp.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)
 
-    this.fps = this.add(new Phaser.Text(game, this.game.width - 10, 10, '', { font: "bold 15px Arial", fill: "#fff" }))
+    this.fps = this.add(new Phaser.Text(game, this.game.width - 10, 10, '', { font: "bold 15px Asap", fill: "#fff" }))
     this.fps.anchor.x = 1
     this.fps.fixedToCamera = true
     this.fps.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2)

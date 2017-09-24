@@ -1,15 +1,12 @@
 import Lockr from 'lockr'
 
 class GameState extends Phaser.State {
-  constructor() {
-    super()
-  }
 
   preload() {
   }
 
   create() {
-    this.text = this.add.text(this.game.width / 2, this.game.height / 2, 'N FLOOR', { font: "bold 50px Arial", fill: '#fff' })
+    this.text = this.add.text(this.game.width / 2, this.game.height / 2, 'N FLOOR', { font: "bold 50px Asap", fill: '#fff' })
     this.text.anchor.set(0.5)
     this.game.time.events.add(1000, () => {
       this.game.state.start('GameState')
