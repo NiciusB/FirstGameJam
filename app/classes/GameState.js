@@ -45,7 +45,7 @@ class GameState extends Phaser.State {
     this.game.player = this.add.existing(new Player(this.game, 100, this.game.world.centerY))
     if (currGame) {
       this.game.player.health = currGame.health
-      this.game.player.weapon = currGame.weapon
+      this.changeWeapon(currGame.weapon)
     }
 
     this.game.camera.follow(this.game.player, Phaser.Camera.FOLLOW_TOPDOWN)

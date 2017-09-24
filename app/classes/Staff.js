@@ -1,9 +1,10 @@
 class Staff extends Phaser.Sprite {
   constructor(player, mouseDelta) {
-    super(player.game, player.x, player.y, 'fire_1')
+    var initialPos = new Phaser.Point(player.x + 30 * player.scale.x, player.y - 20)
+    super(player.game, initialPos.x, initialPos.y, 'fire_1')
     this.player = player
     this.mouseDelta = mouseDelta
-    this.initialPos = new Phaser.Point(player.x, player.y)
+    this.initialPos = initialPos
     // Attributes
     this.speed = 0
     this.maxRange = 500

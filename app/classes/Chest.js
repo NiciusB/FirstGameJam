@@ -45,7 +45,7 @@ class Chest extends Phaser.Sprite {
         this.openCooldown = 500
         var tmp = this.weapon
         this.weapon = this.game.player.weapon
-        this.game.player.weapon = tmp
+        this.game.player.changeWeapon(tmp)
         break
       case 'potion':
         this.openCooldown = 1e5
