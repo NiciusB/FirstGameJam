@@ -9,7 +9,7 @@ class Staff extends Phaser.Sprite {
     this.maxRange = 500
     this.speedGain = 200
     this.attackRange = 125
-    this.attackPower = 45
+    this.attackPower = 60
     this.delay = 300
   }
 
