@@ -16,10 +16,10 @@ class Chest extends Phaser.Sprite {
     this.hint.font = 'Asap'
 
     // Attributes
-    this.type = Math.random() < 0.2 ? 'weapon' : 'potion'
+    this.type = Math.random() < 0.4 ? 'weapon' : 'potion'
     switch (this.type) {
       case 'weapon':
-        this.weapon = Math.random() < 0.33 ? 'dagger' : (Math.random() < 0.66 ? 'dagger' : 'book')
+        this.weapon = Math.random() < 0.33 ? 'dagger' : (Math.random() < 0.66 ? 'staff' : 'book')
         break
       case 'potion':
         this.potion = Math.random() < 0.35 ? 'givehealth' : (Math.random() < 0.5 ? 'stealhealth' : (Math.random() < 0.85 ? 'givemovespeed' : 'stealmovespeed'))
