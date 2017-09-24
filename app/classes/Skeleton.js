@@ -6,6 +6,7 @@ class Skeleton extends Enemy {
     this.body.addRectangle(40, 85, -12, 5)
 
     // Attributes
+    this.body.mass = 1.5
     this.health = this.maxHealth = 25 + this.game.floor * 10
     this.speed = 150
     this.meleeAttackRange = 70
