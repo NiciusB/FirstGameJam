@@ -30,6 +30,7 @@ class GameState extends Phaser.State {
     var currGame = this.loadCurrentGame()
 
     this.game.time.advancedTiming = true
+    this.game.stage.disableVisibilityChange = true    
 
     const worldWidth = 3840
     const worldHeight = 600
