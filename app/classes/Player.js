@@ -14,7 +14,7 @@ class Player extends Alive {
     this.health = this.maxHealth = 100
 
     this.weaponCooldown = 0
-    this.changeWeapon('staff')
+    this.changeWeapon('dagger')
     this.play('standing')
   }
   changeWeapon(weapon) {
@@ -22,7 +22,7 @@ class Player extends Alive {
     if (this.weapon === 'dagger') {
       this.animations.add('standing', [10], 0, false)
       this.animations.add('walking', [11, 10, 12, 10], 5, false)
-      this.animations.add('attacking', [10, 8, 9], 10, false)
+      this.animations.add('attacking', [10, 9, 8, 9], 10, false)
     } else {
       this.animations.add('standing', [3], 0, false)
       this.animations.add('walking', [4, 3, 5, 3], 5, false)
