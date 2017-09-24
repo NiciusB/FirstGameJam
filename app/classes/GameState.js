@@ -15,7 +15,7 @@ class GameState extends Phaser.State {
     this.load.image('mesa_2', 'assets/images/stage/mesa_2.png')
     this.load.image('alfombra_1', 'assets/images/stage/alfombra_1.png')
     this.load.image('estanteria', 'assets/images/stage/estanteria.png')
-    this.load.spritesheet('cofre', 'assets/images/stage/cofre.png', 65, 47)
+    this.load.spritesheet('cofre', 'assets/images/stage/cofre.png', 47, 37)
     this.load.spritesheet('playerSprite', 'assets/images/playerSprite.png', 85, 150)
     this.load.spritesheet('skeletonSprite', 'assets/images/skeletonSprite.png', 72, 100)
     this.load.image('fire_1', 'assets/images/fire_1.png', 25, 25)
@@ -60,6 +60,7 @@ class GameState extends Phaser.State {
   endRoom() {
     Lockr.set('currentGame', {
       health: this.game.player.health,
+      weapon: this.game.player.weapon,
       floor: this.game.floor + 1
     })
     this.game.state.start('InterFloorState')
@@ -70,6 +71,7 @@ class GameState extends Phaser.State {
     if (currGame) {
       Lockr.rm('currentGame')
       this.game.player.health = currGame.health
+      this.game.player.weapon = currGame.weapon
       this.game.floor = currGame.floor
     } else {
       this.game.floor = 1

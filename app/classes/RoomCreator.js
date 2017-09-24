@@ -49,8 +49,6 @@ class RoomCreator extends Phaser.Group {
       var randomPos = new Phaser.Point(200 + Math.random() * (world.width - 500), 100 + Math.random() * (world.height - 150))
       if (this.checkCloseObjects(randomPos, 100)) {
         const cofre = this.add(new Chest(this.game, randomPos.x, randomPos.y))
-        this.game.physics.p2.enable(cofre)
-        cofre.body.kinematic = true
       } else n--
     }
   }
