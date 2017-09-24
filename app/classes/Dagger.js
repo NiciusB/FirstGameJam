@@ -11,6 +11,7 @@ class Dagger extends Phaser.Sprite {
     this.attackRange = 100
     this.attackPower = -5 + this.game.floor * 15
     this.weaponCooldown = 500
+    this.weaponCooldownSlow = 200
   }
 
   update() {
