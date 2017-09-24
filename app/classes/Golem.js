@@ -9,7 +9,7 @@ class Golem extends Enemy {
     this.body.mass = 50
     this.health = this.maxHealth = 150 + this.game.floor * 25
     this.speed = 85
-    this.meleeAttackRange = 80
+    this.meleeAttackRange = 90
     this.meleeAttackPower = 20 + this.game.floor * 3
     this.meleeTTA = 1000
 
