@@ -27,7 +27,7 @@ class Chest extends Phaser.Sprite {
   }
   update() {
     super.update()
-    const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+    const delta = this.game.time.elapsedMS // Delta for 60fps is 16
     if (this.openCooldown > 0) {
       this.openCooldown -= delta
       this.play('opened')

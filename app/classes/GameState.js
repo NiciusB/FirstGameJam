@@ -49,6 +49,7 @@ class GameState extends Phaser.State {
     if (currGame) {
       this.game.player.potions =  currGame.potions
       this.game.player.health = currGame.health
+      this.game.player.speed = currGame.speed
       this.game.player.changeWeapon(currGame.weapon)
     }
 
@@ -73,6 +74,7 @@ class GameState extends Phaser.State {
       health: this.game.player.health,
       weapon: this.game.player.weapon,
       potions: this.game.player.potions,
+      speed: this.game.player.speed,
       floor: this.game.floor + 1
     })
     this.game.state.start('InterFloorState')

@@ -6,9 +6,9 @@ class Staff extends Phaser.Sprite {
     this.mouseDelta = mouseDelta
     this.initialPos = initialPos
     // Attributes
-    this.speed = 0
+    this.speed = 100
     this.maxRange = 500
-    this.speedGain = 200
+    this.speedGain = 800
     this.attackRange = 125
     this.attackPower = 30 + this.game.floor * 5
     this.weaponCooldown = 600
@@ -18,12 +18,12 @@ class Staff extends Phaser.Sprite {
 
   update() {
     super.update()
-    const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+    const delta = this.game.time.elapsedMS // Delta for 60fps is 16
     if (this.delay > 0) this.delay -= delta
     if (this.alive && this.delay <= 0) {
-      this.speed += this.speedGain / delta
-      this.x += this.mouseDelta.x * (this.speed / delta)
-      this.y += this.mouseDelta.y * (this.speed / delta)
+      this.speed += this.speedGain * delta / 1000
+      this.x += this.mouseDelta.x * (this.speed * delta / 1000)
+      this.y += this.mouseDelta.y * (this.speed * delta / 1000)
       if (
         Phaser.Math.distance(this.initialPos.x, this.initialPos.y, this.x, this.y) > this.maxRange ||
         this.x < this.game.world.bounds.left ||

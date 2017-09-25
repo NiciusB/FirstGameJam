@@ -6,7 +6,7 @@ class Book extends Phaser.Sprite {
     this.play('pool')
     // Attributes
     this.attackRange = 100
-    this.attackPower = 5 + this.game.floor * 2.5
+    this.attackPower = 18 + this.game.floor * 9
     this.weaponCooldown = 1000
     this.weaponCooldownSlow = 500
     this.TTL = 1000
@@ -18,12 +18,12 @@ class Book extends Phaser.Sprite {
 
   update() {
     super.update()
-    const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+    const delta = this.game.time.elapsedMS // Delta for 60fps is 16
     if (this.TTL > 0) {
       this.TTL -= delta
       if (this.TTL < 290) this.play('disappear')
       this.enemiesInRange().forEach(enemy => {
-        enemy.damage(this.attackPower / delta)
+        enemy.damage(this.attackPower * delta / 1000)
       })
     }
     else this.destroy()

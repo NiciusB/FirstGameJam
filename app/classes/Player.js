@@ -45,7 +45,7 @@ class Player extends Alive {
   }
   update() {
     super.update()
-    const delta = this.game.time.elapsedMS // Delta for 60fps is 16.66
+    const delta = this.game.time.elapsedMS // Delta for 60fps is 16
 
     if (this.x > this.game.world.width - 50) this.game.state.getCurrentState().endRoom()
 
