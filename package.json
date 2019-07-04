@@ -5,12 +5,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --progress --config webpack.config.dev.js",
-    "build": "webpack -p --progress --config webpack.config.build.js"
+    "build": "webpack -p --progress --config webpack.config.build.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "lodash": "^4.17.4",
     "phaser-ce": "^2.8.7",
-    "lockr": "^0.8.4"
+    "lockr": "^0.8.4",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -29,5 +32,6 @@
     "webpack-dev-server": "^2.8.2"
   },
   "main": "webpack.config.build.js",
-  "author": ""
+  "author": "",
+  "snyk": true
 }
